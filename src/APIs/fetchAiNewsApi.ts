@@ -4,10 +4,11 @@ import { createArticle } from "../models/article";
 export default async function FetchAiNewsApi(
   query: string,
   from: string,
-  to: string
+  to: string,
+  page: number
 ): Promise<Article[]> {
   const apiKey = process.env.REACT_APP_AI_NEWS_API_KEY;
-  let url = `https://eventregistry.org/api/v1/article/getArticles?apiKey=${apiKey}&lang=eng&articlesCount=10`;
+  let url = `https://eventregistry.org/api/v1/article/getArticles?apiKey=${apiKey}&lang=eng&articlesCount=10&articlesPage=${page}`;
   if (query) url += `&keyword=${query}`;
   if (from || to) url += `&from=${from}&to=${to}`;
 

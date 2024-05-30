@@ -23,3 +23,10 @@ export type AiCategory = {
   score: number;
   label: { eng: string };
 };
+
+export interface MainContextType {
+  search: string;
+  setSearch: (value: string) => void;
+  clickSearch: boolean;
+  setClickSearch: (value: boolean) => void;
+}

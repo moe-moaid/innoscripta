@@ -1,18 +1,21 @@
 import { useEffect, useState } from "react";
 import { Article } from "../../types";
 import FetchNewsApi from "../APIs/fetchNewsApi";
+import { useMainContext } from "../context/mainContext";
 
 export default function NewsApi() {
   const [articles, setArticles] = useState<Article[]>([]);
+  const { search } = useMainContext();
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const nytArticles = await FetchNewsApi(
-          "politics",
-          "2024-05-27",
-          "2024-05-29"
+        const newsOrg = await FetchNewsApi(
+          search || 'palestine',
+          // "2009-05-27",
+          // "2017-05-29",
+          // 1
         );
-        setArticles(nytArticles);
+        setArticles(newsOrg);
       } catch (err) {
         console.log(err);
       }

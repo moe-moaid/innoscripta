@@ -7,18 +7,22 @@ export default function AiNews() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const nytArticles = await FetchAiNewsApi(
-          "world",
-          "2024-05-27",
-          "2024-05-29"
+        const AiNews = await FetchAiNewsApi(
+          "tesla, elections",
+          "2017-05-27",
+          "2018-05-29",
+          1
         );
-        setArticles(nytArticles);
+        setArticles(AiNews);
       } catch (err) {
         console.log(err);
       }
     };
     fetchData();
   }, []);
+
+  console.log(articles);
+  
 
   return (
     <div>
