@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 export interface Article {
   title: string;
   url: string;
@@ -25,8 +27,14 @@ export type AiCategory = {
 };
 
 export interface MainContextType {
-  search: string;
-  setSearch: (value: string) => void;
+  searchQuery: string;
+  setSearchQuery: Dispatch<SetStateAction<string>>;
   clickSearch: boolean;
-  setClickSearch: (value: boolean) => void;
+  setClickSearch: Dispatch<SetStateAction<boolean>>;
+  activeSearch: boolean;
+  setActiveSearch: Dispatch<SetStateAction<boolean>>;
+  isLoading: boolean;
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
+  searchResults: Article[];
+  setSearchResults: Dispatch<SetStateAction<Article[]>>;
 }

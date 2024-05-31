@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import FetchNytimesApi from "../APIs/fetchNytimesApi";
 import { Article } from "../../types";
 
-export default function NyTimes() {
+function NyTimes() {
   const [articles, setArticles] = useState<Article[]>([]);
   useEffect(() => {
     const fetchData = async () => {
@@ -48,3 +48,5 @@ export default function NyTimes() {
     </div>
   );
 }
+
+export default NyTimes;

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Article } from "../../types";
 import FetchAiNewsApi from "../APIs/fetchAiNewsApi";
 
-export default function AiNews() {
+function AiNews() {
   const [articles, setArticles] = useState<Article[]>([]);
   useEffect(() => {
     const fetchData = async () => {
@@ -65,3 +65,5 @@ export default function AiNews() {
     </div>
   );
 }
+
+export default AiNews;
