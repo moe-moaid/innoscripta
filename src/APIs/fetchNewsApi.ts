@@ -4,7 +4,9 @@ import { createArticle } from "../models/article";
 
 async function FetchNewsApi(
   query: string,
-  setIsLoading: (isLoading: boolean) => void
+  setIsLoading: (isLoading: boolean) => void,
+  from: string,
+  to: string,
 ): Promise<Article[]> {
   const apiKey = process.env.REACT_APP_NEWS_API_ORG_KEY;
   let url = `https://newsapi.org/v2/everything?language=en&apiKey=${apiKey}`;
@@ -33,6 +35,9 @@ async function FetchNewsApi(
     url += `&q=${encodeURIComponent(encodedKeywords)}&searchIn=title`;
   } else url += `&q='world'&searchIn=title&pageSize=20&page=1`
 
+  if (from && to) {
+    url += `&from=${from}&to=${to}`
+  }
   const response = await fetch(url);
   const data = await response.json();
 

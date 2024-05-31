@@ -6,17 +6,19 @@ const MainContext = createContext<MainContextType | undefined>(undefined);
 export const MainContextProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [search, setSearch] = useState<string>(""); // search Query
-  const [clickSearch, setClickSearch] = useState<boolean>(false); //
-  const [activeSearch, setActiveSearch] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [searchResults, setSearchResults] = useState<Article[]>([]);
+  const [searchQuery, setSearchQuery] = useState<string>(""); // search Query
+  const [clickSearch, setClickSearch] = useState<boolean>(false); // track when the user clicks on the magnifying glass
+  const [activeSearch, setActiveSearch] = useState<boolean>(false); // track if the search field is active to display the instructions
+  const [isLoading, setIsLoading] = useState<boolean>(false); // to display animation while fetching
+  const [searchResults, setSearchResults] = useState<Article[]>([]); // to separate the search results for filtering
+  const [categoriesFilter, setCategoriesFilter] = useState<string[]>([]); // keep track of different categories to display them in filters
+  const [sourcesFilter, setSourcesFilter] = useState<string[]>([]); // keep track of different categories to display them in filters
 
   return (
     <MainContext.Provider
       value={{
-        searchQuery: search,
-        setSearchQuery: setSearch,
+        searchQuery,
+        setSearchQuery,
         clickSearch,
         setClickSearch,
         activeSearch,
@@ -25,6 +27,10 @@ export const MainContextProvider: React.FC<{ children: ReactNode }> = ({
         setSearchResults,
         isLoading,
         setIsLoading,
+        categoriesFilter,
+        setCategoriesFilter,
+        sourcesFilter,
+        setSourcesFilter
       }}
     >
       {children}

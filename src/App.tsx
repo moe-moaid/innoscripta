@@ -1,7 +1,7 @@
 import './App.css';
 import { MainContextProvider } from './context/mainContext';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import SearchRessults from './components/SearchRessults';
+import SearchRessults from './components/SearchRessultsPage';
 import HomePage from './components/HomePage';
 
 function App() {

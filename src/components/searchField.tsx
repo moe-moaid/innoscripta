@@ -12,10 +12,19 @@ import { useNavigate } from "react-router-dom";
 type Props = {
   query: string;
 };
+/**
+ * 
+ * @param  query - get it from the pages it is being used at
+ * e.g. at home page it is null by default, at search it is 
+ * null initially, then it takes the the value from the url 
+ * if the page is refresed to keep consistant search page.
+ * @returns - it returns a compelete search field with button
+ * and instruction for users to search by keywords
+ */
 function SearchField({ query }: Props) {
   const {
-    searchQuery: search,
-    setSearchQuery: setSearch,
+    searchQuery,
+    setSearchQuery,
     activeSearch,
     setActiveSearch,
     setSearchResults,
@@ -26,15 +35,12 @@ function SearchField({ query }: Props) {
 
   function handleTyping(e: ChangeEvent<HTMLInputElement>) {
     const { value } = e.target;
-    setSearch(value);
+    setSearchQuery(value);
   }
 
-  async function initiateSearching() {
-    const news = await FetchNewsApi(search, setIsLoading);
-    searchNavigation(`/searchresults?query=${encodeURIComponent(search)}`);
+  function initiateSearching() {
+    searchNavigation(`/searchresults?query=${encodeURIComponent(searchQuery)}`);
     setActiveSearch(false);
-    setSearchResults(news);
-    return news;
   }
 
   function handleSearching(e: KeyboardEvent<HTMLInputElement>) {
@@ -67,7 +73,7 @@ function SearchField({ query }: Props) {
         className="outline-none w-full"
         type="text"
         placeholder="Click to search..."
-        value={search || query}
+        value={searchQuery || query}
         name="search"
         onChange={handleTyping}
         onKeyDown={handleSearching}

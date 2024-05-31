@@ -1,3 +1,8 @@
+/**
+ * To calculate how much time passed since the article have been posted
+ * @param date - type: Date, Get this value from api
+ * @returns text stating the post have been posted since when
+ */
 export function timeAgo(date: Date): string {
   const now = new Date();
   const seconds = Math.floor((now.getTime() - date.getTime()) / 1000);

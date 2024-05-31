@@ -37,4 +37,8 @@ export interface MainContextType {
   setIsLoading: Dispatch<SetStateAction<boolean>>;
   searchResults: Article[];
   setSearchResults: Dispatch<SetStateAction<Article[]>>;
+  categoriesFilter: string[];
+  setCategoriesFilter: Dispatch<SetStateAction<string[]>>;
+  sourcesFilter: string[];
+  setSourcesFilter: Dispatch<SetStateAction<string[]>>;
 }

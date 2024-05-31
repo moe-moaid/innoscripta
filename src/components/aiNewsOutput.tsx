@@ -21,9 +21,6 @@ function AiNews() {
     fetchData();
   }, []);
 
-  console.log(articles);
-  
-
   return (
     <div>
       {articles &&

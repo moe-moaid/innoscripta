@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Article } from "../../types";
 import FetchNewsApi from "../APIs/fetchNewsApi";
 import { useMainContext } from "../context/mainContext";
+import { timeAgo } from "./relativeTime";
 
 function NewsApi() {
   const [articles, setArticles] = useState<Article[]>([]);
@@ -11,9 +12,9 @@ function NewsApi() {
       try {
         const newsOrg = await FetchNewsApi(
           searchQuery,
-          setIsLoading
-          // "2009-05-27",
-          // "2017-05-29",
+          setIsLoading,
+          "",
+          "",
           // 1
         );
         setArticles(newsOrg);
@@ -58,6 +59,7 @@ function NewsApi() {
                   <p className="">{a?.source?.split(".")[0]}</p>
                   <p className="">by {a?.author?.split(",")[0]}</p>
                   <p className="d-inline">category: {a.category}</p>
+                  <p className="d-inline">Posted @: {timeAgo(a.date)}</p>
                 </div>
 
                 {/* <p className="d-inline">{`${a?.date?.toLocaleDateString()} ${a?.date?.toLocaleTimeString()}`}</p> */}
