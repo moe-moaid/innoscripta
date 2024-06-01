@@ -13,10 +13,10 @@ type Props = {
   query: string;
 };
 /**
- * 
+ *
  * @param  query - get it from the pages it is being used at
- * e.g. at home page it is null by default, at search it is 
- * null initially, then it takes the the value from the url 
+ * e.g. at home page it is null by default, at search it is
+ * null initially, then it takes the the value from the url
  * if the page is refresed to keep consistant search page.
  * @returns - it returns a compelete search field with button
  * and instruction for users to search by keywords
@@ -66,7 +66,7 @@ function SearchField({ query }: Props) {
 
   return (
     <div
-      className="relative flex flex-row justify-between border border-gray-400 rounded-md px-2 py-3 my-4 mx-auto w-1/3"
+      className="relative flex flex-row justify-between border border-gray-400 rounded-md px-2 py-3 my-4 w-1/3"
       ref={inputRef}
     >
       <input

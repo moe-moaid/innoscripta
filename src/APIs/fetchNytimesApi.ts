@@ -21,7 +21,7 @@ export default async function FetchNytimesApi(
       title: article.headline.main,
       url: article.web_url,
       source: article.source,
-      category: article.keywords.map((k: Keyword) => k.value),
+      category: article.keywords.map((k: Keyword) => k.value) || 'all',
       date: article.pub_date,
       author: article.byline.original,
       keywords: article.keywords.map((k: Keyword) => k.value),

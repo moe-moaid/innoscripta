@@ -10,8 +10,13 @@ function AiNews() {
 
   useEffect(() => {
     const fetchData = async () => {
+        const currentDate = new Date();
+        const oneWeekAgoDate = new Date();
+        oneWeekAgoDate.setDate(currentDate.getDate() - 7);
+        const from = oneWeekAgoDate.toISOString().split("T")[0];
+        const to = currentDate.toISOString().split("T")[0];
       try {
-        const aiNews = await FetchAiNewsApi("world", "", "", setIsLoading);
+        const aiNews = await FetchAiNewsApi("world", from, to, setIsLoading);
         setArticles(aiNews);
       } catch (err) {
         console.log(err);
@@ -52,7 +57,7 @@ function AiNews() {
               <div className="flex flex-col items-end w-1/2">
                 <p className="">{a?.source?.split(".")[0]}</p>
                 <p className="">By {a?.author?.split(",")[0]}</p>
-                <p className="w-max-[25%] w-[20%] overflow-hidden whitespace-nowrap text-ellipsis">
+                <p className="max-w-[25%] w-auto overflow-hidden whitespace-nowrap text-ellipsis">
                   Category: {a.category}
                 </p>
                 <p className="d-inline">posted: {timeAgo(a.date)}</p>

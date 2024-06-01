@@ -13,6 +13,7 @@ export const MainContextProvider: React.FC<{ children: ReactNode }> = ({
   const [searchResults, setSearchResults] = useState<Article[]>([]); // to separate the search results for filtering
   const [categoriesFilter, setCategoriesFilter] = useState<string[]>([]); // keep track of different categories to display them in filters
   const [sourcesFilter, setSourcesFilter] = useState<string[]>([]); // keep track of different categories to display them in filters
+  const [showCustomize, setShowCustomize] = useState<boolean>(false);
 
   return (
     <MainContext.Provider
@@ -30,7 +31,9 @@ export const MainContextProvider: React.FC<{ children: ReactNode }> = ({
         categoriesFilter,
         setCategoriesFilter,
         sourcesFilter,
-        setSourcesFilter
+        setSourcesFilter,
+        showCustomize,
+        setShowCustomize
       }}
     >
       {children}

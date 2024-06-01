@@ -40,7 +40,7 @@ function SearchResults() {
         const from = oneWeekAgoDate.toISOString().split("T")[0];
         const to = currentDate.toISOString().split("T")[0];
 
-        const newsOrg = await FetchNewsApi(query, setIsLoading, from, to);
+        const newsOrg = await FetchNewsApi(query, setIsLoading, from, to, true);
 
         // Create unique set of the available categories
         const categories = newsOrg

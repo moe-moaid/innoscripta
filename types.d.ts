@@ -26,6 +26,12 @@ export type AiCategory = {
   label: { eng: string };
 };
 
+export type Settings = {
+  sources: string | null;
+  categories: string | null;
+  authors: string | null;
+};
+
 export interface MainContextType {
   searchQuery: string;
   setSearchQuery: Dispatch<SetStateAction<string>>;
@@ -41,4 +47,6 @@ export interface MainContextType {
   setCategoriesFilter: Dispatch<SetStateAction<string[]>>;
   sourcesFilter: string[];
   setSourcesFilter: Dispatch<SetStateAction<string[]>>;
+  showCustomize: boolean;
+  setShowCustomize: Dispatch<SetStateAction<boolean>>;
 }
