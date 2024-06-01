@@ -1,19 +1,18 @@
 import { useEffect, useState } from "react";
 import { Article } from "../../types";
 import FetchAiNewsApi from "../APIs/fetchAiNewsApi";
+import { timeAgo } from "./relativeTime";
+import { useMainContext } from "../context/mainContext";
 
 function AiNews() {
   const [articles, setArticles] = useState<Article[]>([]);
+  const { setIsLoading } = useMainContext();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const AiNews = await FetchAiNewsApi(
-          "tesla, elections",
-          "2017-05-27",
-          "2018-05-29",
-          1
-        );
-        setArticles(AiNews);
+        const aiNews = await FetchAiNewsApi("world", "", "", setIsLoading);
+        setArticles(aiNews);
       } catch (err) {
         console.log(err);
       }
@@ -27,37 +26,38 @@ function AiNews() {
         articles
           .filter((a: Article) => a.date)
           .map((a: Article, index: number) => (
-            <>
-              <div
-                key={index}
-                className="bg-gray-300 border-b border-gray-200 text-grey-500 p-4 mb-2"
-              >
-                <p className="text-red-500 font-semibold">ID:: {index}</p>
-                <a href={a.url} className="d-inline">
-                  <p>{a.title}</p>
-                </a>
-                <p className="d-inline">{`${a?.date?.toLocaleDateString()} ${a?.date?.toLocaleTimeString()}`}</p>
-                <p className="d-inline">
-                  source from AI:: {a.source.split(".")[0]}
-                </p>
-                <p className="d-inline">cat:: {a.category}</p>
-                <p className="d-inline">author:: {a.author}</p>
-                <p className="d-inline">keywords:: {a.keywords}</p>
-                <p className="d-inline">image:: {a.image}</p>
+            <div
+              key={index}
+              className="bg-yellow-50 border border-yellow-300 p-4 mb-4 flex flex-row justify-between rounded-lg mx-4"
+            >
+              <div className="flex flex-row space-x-2 w-1/2">
                 <img
+                  className="w-[130px] h-[130px] rounded-md"
                   src={
                     a.image
                       ? a.image
                       : "https://www.dummyimage.co.uk/600x400/cbcbcb/959595/No Image Found/40"
                   }
                   alt="article thumbnail"
-                  className="w-[250px] h-[250px] border border-gray-700 rounded-xl"
                 />
-                <p className="d-inline overflow-hidden whitespace-nowrap text-ellipsis w-[25%]">
-                  body:: {a.body}
-                </p>
+                <div className="w-[70%]">
+                  <a href={a.url} className="">
+                    <p className="font-semibold">{a.title}</p>
+                  </a>
+                  <p className="w-[70%] overflow-hidden whitespace-nowrap text-ellipsis">
+                    {a.body}
+                  </p>
+                </div>
               </div>
-            </>
+              <div className="flex flex-col items-end w-1/2">
+                <p className="">{a?.source?.split(".")[0]}</p>
+                <p className="">By {a?.author?.split(",")[0]}</p>
+                <p className="w-max-[25%] w-[20%] overflow-hidden whitespace-nowrap text-ellipsis">
+                  Category: {a.category}
+                </p>
+                <p className="d-inline">posted: {timeAgo(a.date)}</p>
+              </div>
+            </div>
           ))}
     </div>
   );

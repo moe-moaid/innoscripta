@@ -138,7 +138,7 @@ function SearchResults() {
         {filteredResults.map((a: Article, index: number) => (
           <div
             key={index}
-            className="border border-gray-200 text-grey-500 p-4 mb-2 flex flex-row justify-between rounded-lg mx-4"
+            className="border border-gray-200 p-4 mb-2 flex flex-row justify-between rounded-lg mx-4"
           >
             <div className="flex flex-row space-x-2 w-1/2">
               <img

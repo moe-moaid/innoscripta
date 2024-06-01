@@ -4,15 +4,17 @@ import { createArticle } from "../models/article";
 export default async function FetchNytimesApi(
   query: string,
   from: string,
-  to: string
+  to: string,
+  setIsLoading: (isLoaidng: boolean) => void
 ): Promise<Article[]> {
   const apiKey = process.env.REACT_APP_NYTIMES_API_KEY;
-  let url = `https://api.nytimes.com/svc/archive/v1/2024/5.json?api-key=${apiKey}`;
+  let url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=${apiKey}&page=0&sort=newest&begin_date=${from}&end_date=${to}`;
   if (query) url += `&q=${query}`;
-  if (from || to) url += `&begin_date=${from}&end_date=${to}`;
 
+  setIsLoading(true);
   const response = await fetch(url);
   const data = await response.json();
+  setIsLoading(false);
 
   return data.response.docs.map((article: any) =>
     createArticle({
