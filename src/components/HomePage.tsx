@@ -17,7 +17,7 @@ function HomePage() {
   useEffect(() => {
     if (!isLoading) {
       setNewsComponents([
-        <NewsApi key="nyTimes" />,
+        <NewsApi key="news-org" />,
         <AiNews key="ai-news" />,
         <NyTimes key="nyTimes" />,
       ]);
@@ -27,7 +27,6 @@ function HomePage() {
   function handleCustomizeClick() {
     setShowCustomize(!showCustomize);
   }
-  console.log(showCustomize);
 
   return (
     <>
