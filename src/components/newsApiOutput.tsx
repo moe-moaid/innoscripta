@@ -60,12 +60,6 @@ function NewsApi() {
                 <p className="max-w-[20%] w-auto">category: {a.category}</p>
                 <p className="">Posted: {timeAgo(a.date)}</p>
               </div>
-
-              {/* <p className="d-inline">{`${a?.date?.toLocaleDateString()} ${a?.date?.toLocaleTimeString()}`}</p> */}
-              {/* <p className="d-inline">cat:: {a.category}</p> */}
-              {/* <p className="d-inline">keywords:: {a.keywords}</p> */}
-              {/* <p className="d-inline">image:: {a.image}</p> */}
-              {/* <p className="d-inline">body:: {a.body}</p> */}
             </div>
           ))}
     </div>

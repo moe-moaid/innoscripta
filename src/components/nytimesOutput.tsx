@@ -34,6 +34,7 @@ function NyTimes() {
     fetchData();
   }, []);
 
+  console.log(articles);
   return (
     <div>
       {articles &&

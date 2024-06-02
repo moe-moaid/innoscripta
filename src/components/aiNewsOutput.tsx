@@ -10,11 +10,11 @@ function AiNews() {
 
   useEffect(() => {
     const fetchData = async () => {
-        const currentDate = new Date();
-        const oneWeekAgoDate = new Date();
-        oneWeekAgoDate.setDate(currentDate.getDate() - 7);
-        const from = oneWeekAgoDate.toISOString().split("T")[0];
-        const to = currentDate.toISOString().split("T")[0];
+      const currentDate = new Date();
+      const oneWeekAgoDate = new Date();
+      oneWeekAgoDate.setDate(currentDate.getDate() - 7);
+      const from = oneWeekAgoDate.toISOString().split("T")[0];
+      const to = currentDate.toISOString().split("T")[0];
       try {
         const aiNews = await FetchAiNewsApi("world", from, to, setIsLoading);
         setArticles(aiNews);
