@@ -6,7 +6,7 @@ import { useMainContext } from "../context/mainContext";
 
 function NyTimes() {
   const [articles, setArticles] = useState<Article[]>([]);
-  const { setIsLoading } = useMainContext();
+  const { setLoadingNYTimesNews } = useMainContext();
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -21,10 +21,10 @@ function NyTimes() {
           .split("T")[0]
           .replace(/-/g, "");
         const nytArticles = await FetchNytimesApi(
-          "politics, economy, sports",
+          "politics",
           from,
           to,
-          setIsLoading
+          setLoadingNYTimesNews
         );
         setArticles(nytArticles);
       } catch (err) {

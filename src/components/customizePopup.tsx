@@ -87,7 +87,7 @@ const CustomizePopup: React.FC = () => {
                   name="sources"
                   value={settings.sources || ""}
                   onChange={handleChange}
-                  placeholder="CNN, BBC, NYTimes"
+                  placeholder="CNN, BBC, The New York Times"
                 />
               </div>
               <div className="flex flex-row space-x-3 my-6">

@@ -15,8 +15,8 @@ function SearchResults() {
   const {
     setSearchResults,
     searchResults,
-    isLoading,
-    setIsLoading,
+    loadingOrgNews,
+    setLoadingOrgNews,
     categoriesFilter,
     setCategoriesFilter,
     sourcesFilter,
@@ -32,7 +32,7 @@ function SearchResults() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setIsLoading(true);
+        setLoadingOrgNews(true);
 
         const currentDate = new Date();
         const oneWeekAgoDate = new Date();
@@ -40,7 +40,7 @@ function SearchResults() {
         const from = oneWeekAgoDate.toISOString().split("T")[0];
         const to = currentDate.toISOString().split("T")[0];
 
-        const newsOrg = await FetchNewsApi(query, setIsLoading, from, to, true);
+        const newsOrg = await FetchNewsApi(query, setLoadingOrgNews, from, to, true);
 
         // Create unique set of the available categories
         const categories = newsOrg
@@ -63,13 +63,13 @@ function SearchResults() {
       } catch (err) {
         console.log(err);
       } finally {
-        setIsLoading(false);
+        setLoadingOrgNews(false);
       }
     };
     fetchData();
   }, [
     query,
-    setIsLoading,
+    setLoadingOrgNews,
     setSearchResults,
     setCategoriesFilter,
     setSourcesFilter,
@@ -119,7 +119,7 @@ function SearchResults() {
     </div>
 
       <div>
-        {isLoading && (
+        {loadingOrgNews && (
           <div
             className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"
             role="status"
@@ -174,7 +174,7 @@ function SearchResults() {
               </div>
             </div>
         ))}
-        {(!filteredResults || filteredResults.length === 0) && !isLoading && (
+        {(!filteredResults || filteredResults.length === 0) && !loadingOrgNews && (
           <p>No results were found for your search</p>
         )}
       </div>

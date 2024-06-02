@@ -9,11 +9,13 @@ export const MainContextProvider: React.FC<{ children: ReactNode }> = ({
   const [searchQuery, setSearchQuery] = useState<string>(""); // search Query
   const [clickSearch, setClickSearch] = useState<boolean>(false); // track when the user clicks on the magnifying glass
   const [activeSearch, setActiveSearch] = useState<boolean>(false); // track if the search field is active to display the instructions
-  const [isLoading, setIsLoading] = useState<boolean>(false); // to display animation while fetching
   const [searchResults, setSearchResults] = useState<Article[]>([]); // to separate the search results for filtering
   const [categoriesFilter, setCategoriesFilter] = useState<string[]>([]); // keep track of different categories to display them in filters
   const [sourcesFilter, setSourcesFilter] = useState<string[]>([]); // keep track of different categories to display them in filters
   const [showCustomize, setShowCustomize] = useState<boolean>(false);
+  const [loadingOrgNews, setLoadingOrgNews] = useState<boolean>(false);
+  const [loadingAiNews, setLoadingAiNews] = useState<boolean>(false);
+  const [loadingNYTimesNews, setLoadingNYTimesNews] = useState<boolean>(false);
 
   return (
     <MainContext.Provider
@@ -26,14 +28,18 @@ export const MainContextProvider: React.FC<{ children: ReactNode }> = ({
         setActiveSearch,
         searchResults,
         setSearchResults,
-        isLoading,
-        setIsLoading,
         categoriesFilter,
         setCategoriesFilter,
         sourcesFilter,
         setSourcesFilter,
         showCustomize,
-        setShowCustomize
+        setShowCustomize,
+        loadingOrgNews,
+        setLoadingOrgNews,
+        loadingAiNews,
+        setLoadingAiNews,
+        loadingNYTimesNews,
+        setLoadingNYTimesNews
       }}
     >
       {children}

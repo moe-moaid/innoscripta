@@ -87,11 +87,12 @@ export default async function FetchAiNewsApi(
   query: string,
   from: string,
   to: string,
-  setIsLoading: (isLoading: boolean) => void
+  // setIsLoading: (isLoading: boolean) => void,
+  setLoadingAiNews: (loadingAiNews: boolean) => void,
 ): Promise<Article[]> {
   let url = `https://eventregistry.org/api/v1/article/getArticles`;
 
-  setIsLoading(true);
+  setLoadingAiNews(true);
 
   const customFeed = localStorage.getItem("customField");
   let parsedCustomFeed = {
@@ -146,7 +147,7 @@ export default async function FetchAiNewsApi(
   });
 
   const data = await response.json();
-  setIsLoading(false);
+  setLoadingAiNews(false);
 
   if (!data.articles || data.articles.results.length === 0) {
     throw new Error("No articles found");

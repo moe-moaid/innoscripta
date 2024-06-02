@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import CustomizePopup from "./customizePopup";
 
 function HomePage() {
-  const { isLoading, showCustomize, setShowCustomize } = useMainContext();
+  const { loadingNYTimesNews, loadingAiNews, loadingOrgNews, showCustomize, setShowCustomize } = useMainContext();
   const [newsComponents, setNewsComponents] = useState<JSX.Element[]>([]); // Save components here to render if there is no loading state
   // const [showCustomize, setShowCustomize] = useState<boolean>(false);
   /**
@@ -15,14 +15,14 @@ function HomePage() {
    * re-rendering that i faced without using useEffect hook
    */
   useEffect(() => {
-    if (!isLoading) {
+    if (!loadingAiNews && !loadingNYTimesNews && !loadingOrgNews) {
       setNewsComponents([
         <NewsApi key="news-org" />,
         <AiNews key="ai-news" />,
         <NyTimes key="nyTimes" />,
       ]);
-    }
-  }, [isLoading]);
+    } 
+  }, [loadingAiNews, loadingNYTimesNews, loadingOrgNews]);
 
   function handleCustomizeClick() {
     setShowCustomize(!showCustomize);
@@ -30,7 +30,7 @@ function HomePage() {
 
   return (
     <>
-      {isLoading && (
+      {(loadingAiNews || loadingNYTimesNews || loadingOrgNews) && (
         <div
           className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"
           role="status"

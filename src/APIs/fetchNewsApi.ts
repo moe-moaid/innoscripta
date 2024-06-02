@@ -11,7 +11,7 @@ async function fetchAvailableSources(apiKey: string): Promise<any[]> {
 
 async function FetchNewsApi(
   query: string,
-  setIsLoading: (isLoading: boolean) => void,
+  setLoadingOrgNews: (loadingOrgNews: boolean) => void,
   from: string,
   to: string,
   isSearchPage: boolean = false
@@ -23,7 +23,7 @@ async function FetchNewsApi(
 
   let url = `https://newsapi.org/v2/everything?language=en&apiKey=${apiKey}&sortBy=publishedAt`;
 
-  setIsLoading(true);
+  setLoadingOrgNews(true);
 
   const customFeed = localStorage.getItem("customField");
   let parsedCustomFeed = {
@@ -50,9 +50,9 @@ async function FetchNewsApi(
     if (matchedSources.length > 0) {
       url = `https://newsapi.org/v2/everything?q=world&apiKey=${apiKey}&sources=${matchedSources.join(
         ","
-      )}&page=1&pageSize=20`;
+      )}&page=1&pageSize=20&sortBy=publishedAt`;
     } else {
-      setIsLoading(false);
+      setLoadingOrgNews(false);
       console.log("No matching sources found");
       return []; // Return an empty array if no matching sources
     }
@@ -62,7 +62,7 @@ async function FetchNewsApi(
       const encodedKeywords = keywords.join(" OR ");
       url += `&q=${encodeURIComponent(encodedKeywords)}&searchIn=title`;
     } else {
-      url += `&q='world'&searchIn=title&pageSize=20&page=1`;
+      url += `&q='world'&searchIn=title&pageSize=20&page=1&sortBy=publishedAt`;
     }
     if (from && to) {
       url += `&from=${from}&to=${to}`;
@@ -72,7 +72,7 @@ async function FetchNewsApi(
   const response = await fetch(url);
   const data = await response.json();
 
-  setIsLoading(false);
+  setLoadingOrgNews(false);
   if (!data.articles) {
     console.log("No articles found");
     return [];

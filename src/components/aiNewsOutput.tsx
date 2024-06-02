@@ -6,7 +6,7 @@ import { useMainContext } from "../context/mainContext";
 
 function AiNews() {
   const [articles, setArticles] = useState<Article[]>([]);
-  const { setIsLoading } = useMainContext();
+  const { setLoadingAiNews } = useMainContext();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,7 +16,7 @@ function AiNews() {
       const from = oneWeekAgoDate.toISOString().split("T")[0];
       const to = currentDate.toISOString().split("T")[0];
       try {
-        const aiNews = await FetchAiNewsApi("world", from, to, setIsLoading);
+        const aiNews = await FetchAiNewsApi("world", from, to, setLoadingAiNews);
         setArticles(aiNews);
       } catch (err) {
         console.log(err);

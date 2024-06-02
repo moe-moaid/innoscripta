@@ -6,13 +6,13 @@ import { timeAgo } from "./relativeTime";
 
 function NewsApi() {
   const [articles, setArticles] = useState<Article[]>([]);
-  const { searchQuery, setIsLoading } = useMainContext();
+  const { searchQuery, setLoadingOrgNews } = useMainContext();
   useEffect(() => {
     const fetchData = async () => {
       try {
         const newsOrg = await FetchNewsApi(
           searchQuery,
-          setIsLoading,
+          setLoadingOrgNews,
           "",
           ""
           // 1

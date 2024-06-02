@@ -39,8 +39,6 @@ export interface MainContextType {
   setClickSearch: Dispatch<SetStateAction<boolean>>;
   activeSearch: boolean;
   setActiveSearch: Dispatch<SetStateAction<boolean>>;
-  isLoading: boolean;
-  setIsLoading: Dispatch<SetStateAction<boolean>>;
   searchResults: Article[];
   setSearchResults: Dispatch<SetStateAction<Article[]>>;
   categoriesFilter: string[];
@@ -49,4 +47,10 @@ export interface MainContextType {
   setSourcesFilter: Dispatch<SetStateAction<string[]>>;
   showCustomize: boolean;
   setShowCustomize: Dispatch<SetStateAction<boolean>>;
+  loadingOrgNews: boolean;
+  setLoadingOrgNews: Dispatch<SetStateAction<boolean>>;
+  loadingAiNews: boolean;
+  setLoadingAiNews: Dispatch<SetStateAction<boolean>>;
+  loadingNYTimesNews: boolean;
+  setLoadingNYTimesNews: Dispatch<SetStateAction<boolean>>;
 }
