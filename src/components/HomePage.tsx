@@ -53,10 +53,10 @@ function HomePage() {
           </svg>
         </div>
       )}
-      <div className="flex flex-row justify-center items-center space-x-5">
+      <div className="flex flex-col md:flex-row justify-center items-center space-x-0 mx-5 md:mx-0 md:space-x-5">
         <SearchField query={""} />
         <button
-          className="outline-none stroke-none bg-green-50 px-3 py-2 rounded-lg border-2 border-green-300 flex flex-row justify-center items-center space-x-3"
+          className="outline-none stroke-none bg-green-50 px-3 py-2 mb-3 md:mb-0 rounded-lg border-2 border-green-300 flex flex-row justify-center items-center space-x-3"
           onClick={handleCustomizeClick}
         >
           <svg

@@ -43,9 +43,9 @@ function NyTimes() {
           .map((a: Article, index: number) => (
             <div
               key={index}
-              className="bg-pink-50 border border-pink-300 p-4 mb-4 flex flex-row justify-between rounded-lg mx-4"
+              className="bg-pink-50 border border-pink-300 text-grey-500 p-4 mb-4 flex flex-col md:flex-row justify-between items-center rounded-lg mx-4"
             >
-              <div className="flex flex-row space-x-2 w-1/2">
+              <div className="flex flex-col md:flex-row items-center md:items-start md:space-x-2 w-full md:w-1/2">
                 <img
                   className="w-[130px] h-[130px] rounded-md"
                   src={
@@ -55,22 +55,21 @@ function NyTimes() {
                   }
                   alt="article thumbnail"
                 />
-                <div className="w-[70%]">
+
+                <div className="w-full md:w-[70%]">
                   <a href={a.url} className="">
-                    <p className="font-semibold">{a.title}</p>
+                    <p className="font-semibold text-center md:text-start">{a.title}</p>
                   </a>
-                  <p className="w-[70%] overflow-hidden whitespace-nowrap text-ellipsis">
+                  <p className="w-full md:w-[70%] overflow-hidden whitespace-nowrap text-ellipsis">
                     {a.body}
                   </p>
                 </div>
               </div>
-              <div className="flex flex-col items-end w-1/2">
-                <p className="">{a?.source?.split(".")[0]}</p>
-                <p className="">{a?.author?.split(",")[0]}</p>
-                <p className="max-w-[25%] w-auto overflow-hidden whitespace-nowrap text-ellipsis">
-                  Category: {a.category}
-                </p>
-                <p className="d-inline">posted: {timeAgo(a.date)}</p>
+              <div className="flex flex-col items-start md:items-end w-[100%] my-2">
+                <p className="mt-2">{a?.source?.split(".")[0]}</p>
+                <p className="">by {a?.author?.split(",")[0]}</p>
+                <p className="md:max-w-[35%] w-auto md:text-end">category: {a.category}</p>
+                <p className="">Posted: {timeAgo(a.date)}</p>
               </div>
             </div>
           ))}

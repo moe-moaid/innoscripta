@@ -32,6 +32,11 @@ const CustomizePopup: React.FC = () => {
       const parsedSettings = JSON.parse(currentSettings);
       setSettings(parsedSettings);
     }
+
+    document.body.classList.add('no-scroll');
+    return () => {
+      document.body.classList.remove('no-scroll');
+    }
   }, []);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -46,12 +51,12 @@ const CustomizePopup: React.FC = () => {
     setShowCustomize(false);
   };
   return (
-    <>
+    <div className="mx-2">
       <div
         className="absolute top-0 bottom-0 left-0 right-0 z-30 bg-[#05062d9e] w-full h-full"
         onClick={handleClickOnBg}
       ></div>
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-1/3 bg-white rounded-xl">
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-full md:w-4/5 lg:w-2/5 bg-white rounded-xl">
         {saving ? (
           <>
             <p className="mx-auto text-center text-gray-400 my-6">yahooooooo</p>
@@ -131,7 +136,7 @@ const CustomizePopup: React.FC = () => {
           </>
         )}
       </div>
-    </>
+    </div>
   );
 };
 

@@ -92,7 +92,10 @@ function SearchResults() {
 
   return (
     <>
+      <div className="flex flex-col items-center mx-5 md:mx-0">
       <SearchField query={query} />
+      <p className="font-medium">Filter your results</p>
+        <div className="flex flex-col md:flex-row space-x-0 md:space-x-5">
       <FiltersDropdown
         filterName="categories"
         filterOptions={categoriesFilter}
@@ -111,6 +114,10 @@ function SearchResults() {
         selectedValue={selectedTime}
         onChange={setSelectedTime}
       />
+
+      </div>
+    </div>
+
       <div>
         {isLoading && (
           <div
@@ -137,35 +144,35 @@ function SearchResults() {
         )}
         {filteredResults.map((a: Article, index: number) => (
           <div
-            key={index}
-            className="border border-gray-200 p-4 mb-2 flex flex-row justify-between rounded-lg mx-4"
-          >
-            <div className="flex flex-row space-x-2 w-1/2">
-              <img
-                className="w-[130px] h-[130px] rounded-md"
-                src={
-                  a.image
-                    ? a.image
-                    : "https://www.dummyimage.co.uk/600x400/cbcbcb/959595/No Image Found/40"
-                }
-                alt="article thumbnail"
-              />
-              <div className="w-[70%]">
-                <a href={a.url} className="">
-                  <p className="font-semibold">{a.title}</p>
-                </a>
-                <p className="w-[70%] overflow-hidden whitespace-nowrap text-ellipsis">
-                  {a.body}
-                </p>
+              key={index}
+              className="bg-transparent border border-gray-300 text-grey-500 p-4 mb-4 flex flex-col md:flex-row justify-between items-center rounded-lg mx-4"
+            >
+              <div className="flex flex-col md:flex-row items-center md:items-start md:space-x-2 w-full md:w-1/2">
+                <img
+                  className="w-[130px] h-[130px] rounded-md"
+                  src={
+                    a.image
+                      ? a.image
+                      : "https://www.dummyimage.co.uk/600x400/cbcbcb/959595/No Image Found/40"
+                  }
+                  alt="article thumbnail"
+                />
+                <div className="w-full md:w-[70%]">
+                  <a href={a.url} className="">
+                    <p className="font-semibold text-center md:text-start">{a.title}</p>
+                  </a>
+                  <p className="w-full md:w-[70%] overflow-hidden whitespace-nowrap text-ellipsis">
+                    {a.body}
+                  </p>
+                </div>
+              </div>
+              <div className="flex flex-col items-start md:items-end w-[100%] my-2">
+                <p className="mt-2">{a?.source?.split(".")[0]}</p>
+                <p className="">by {a?.author?.split(",")[0]}</p>
+                <p className="md:max-w-[35%] w-auto">category: {a.category}</p>
+                <p className="">Posted: {timeAgo(a.date)}</p>
               </div>
             </div>
-            <div className="flex flex-col items-end w-[100%]">
-              <p className="">{a?.source?.split(".")[0]}</p>
-              <p className="">By {a?.author?.split(",")[0]}</p>
-              <p className="d-inline">Category: {a.category}</p>
-              <p className="d-inline">posted: {timeAgo(a.date)}</p>
-            </div>
-          </div>
         ))}
         {(!filteredResults || filteredResults.length === 0) && !isLoading && (
           <p>No results were found for your search</p>

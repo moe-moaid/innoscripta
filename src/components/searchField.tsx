@@ -27,8 +27,6 @@ function SearchField({ query }: Props) {
     setSearchQuery,
     activeSearch,
     setActiveSearch,
-    setSearchResults,
-    setIsLoading,
   } = useMainContext();
   const inputRef = useRef<HTMLDivElement>(null); // Correctly typing the ref
   const searchNavigation = useNavigate();
@@ -66,14 +64,14 @@ function SearchField({ query }: Props) {
 
   return (
     <div
-      className="relative flex flex-row justify-between border border-gray-400 rounded-md px-2 py-3 my-4 w-1/3"
+      className="relative flex flex-row justify-between border border-gray-400 rounded-md px-2 py-3 my-4 w-full md:w-1/3"
       ref={inputRef}
     >
       <input
         className="outline-none w-full"
         type="text"
         placeholder="Click to search..."
-        value={searchQuery || query}
+        value={searchQuery || query || ''}
         name="search"
         onChange={handleTyping}
         onKeyDown={handleSearching}
