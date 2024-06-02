@@ -7,7 +7,7 @@ import {
 } from "react";
 import { useMainContext } from "../context/mainContext";
 import FetchNewsApi from "../APIs/fetchNewsApi";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 type Props = {
   query: string;
@@ -25,11 +25,12 @@ function SearchField({ query }: Props) {
   const {
     searchQuery,
     setSearchQuery,
-    activeSearch,
     setActiveSearch,
+    activeSearch
   } = useMainContext();
-  const inputRef = useRef<HTMLDivElement>(null); // Correctly typing the ref
+  const inputRef = useRef<HTMLDivElement>(null);
   const searchNavigation = useNavigate();
+  const location = useLocation();
 
   function handleTyping(e: ChangeEvent<HTMLInputElement>) {
     const { value } = e.target;
@@ -62,6 +63,12 @@ function SearchField({ query }: Props) {
     };
   }, [setActiveSearch]);
 
+  useEffect(() => {
+    if (location.pathname === "/searchresults") {
+      setSearchQuery(query);
+    }
+  }, [location, query, setSearchQuery]);
+
   return (
     <div
       className="relative flex flex-row justify-between border border-gray-400 rounded-md px-2 py-3 my-4 w-full md:w-1/3"
@@ -71,7 +78,7 @@ function SearchField({ query }: Props) {
         className="outline-none w-full"
         type="text"
         placeholder="Click to search..."
-        value={searchQuery || query || ''}
+        value={searchQuery ?? query}
         name="search"
         onChange={handleTyping}
         onKeyDown={handleSearching}
@@ -112,3 +119,4 @@ function SearchField({ query }: Props) {
 }
 
 export default SearchField;
+
